@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDDY</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/hud.css">
+<link rel="stylesheet" id="theme" href="/static/themes/{{THEME}}.css">
+</head>
+<body data-state="idle">
+<div class="scan" aria-hidden="true"></div>
+<main class="hud">
+
+  <header class="top">
+    <div class="brand"><span class="logo">E&nbsp;D&nbsp;D&nbsp;Y</span><span class="sub" id="sub">SISTEMA ONLINE</span></div>
+    <div class="chips" id="chips">
+      <span class="chip" id="chip-llm">MODELO <b>—</b></span>
+      <span class="chip" id="chip-voice">VOZ <b>—</b></span>
+      <span class="chip" id="chip-mode">MODO <b>—</b></span>
+    </div>
+    <div class="clock"><span id="clock">--:--:--</span><small id="date"></small></div>
+  </header>
+
+  <aside class="panel left">
+    <h2>BRIEFING</h2>
+    <div class="hello"><div class="hi" id="hi">—</div><div class="dt" id="dt"></div></div>
+    <div class="wx" id="wx"></div>
+    <h2>PRIORIDADES</h2>
+    <ol class="plan" id="plan"></ol>
+    <h2>LEMBRETES</h2>
+    <div class="reminders" id="reminders"></div>
+    <div id="news-box" hidden><h2>NOVIDADES</h2><ul class="news" id="news"></ul></div>
+    <div id="jobs-box" hidden><h2>A SEGUIR</h2><div class="reminders" id="jobs"></div></div>
+  </aside>
+
+  <section class="core">
+    <canvas id="avatar" aria-label="Núcleo do Eddy"></canvas>
+    <div class="status" id="status">EM ESPERA</div>
+    <div class="caption">
+      <p class="heard" id="heard"></p>
+      <p class="said" id="said"></p>
+    </div>
+  </section>
+
+  <aside class="panel right">
+    <h2>AÇÕES</h2>
+    <ul class="actions" id="actions"></ul>
+    <h2>HABILIDADES</h2>
+    <div class="skills" id="skills"></div>
+    <h2>SISTEMA</h2>
+    <dl class="kv" id="sys"></dl>
+  </aside>
+
+  <footer class="bottom">
+    <button id="mic" class="mic" aria-label="Premir para falar" title="Prime e fala (ou segura a barra de espaço)">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+    </button>
+    <div class="meter"><i id="meter"></i></div>
+    <form id="cmd" autocomplete="off"><input id="cmd-in" type="text" maxlength="500" placeholder="diz «Eddy…» ou escreve um comando"></form>
+    <button id="private" class="tog" title="Modo privado: voz sempre local">PRIVADO</button>
+    <button id="panic" class="btn-panic" title="Parar tudo e desligar ações de risco">PARAR TUDO</button>
+  </footer>
+
+  <div id="confirm" class="confirm" hidden role="alertdialog" aria-labelledby="c-title">
+    <div class="c-head"><span id="c-level">NÍVEL 3</span><span id="c-count">30</span></div>
+    <h3 id="c-title">Confirmar ação</h3>
+    <p id="c-sum"></p>
+    <p class="c-code">ou diz: «confirma <b id="c-code"></b>»</p>
+    <div class="c-btns"><button id="c-no">CANCELAR <kbd>Esc</kbd></button><button id="c-yes">CONFIRMAR <kbd>Enter</kbd></button></div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <div id="offline" class="offline" hidden>SEM LIGAÇÃO AO NÚCLEO — a tentar reconectar…</div>
+</main>
+<script src="/static/avatar.js"></script>
+<script src="/static/hud.js"></script>
+</body>
+</html>

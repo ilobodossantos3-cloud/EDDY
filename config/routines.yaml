@@ -1,0 +1,12 @@
+# Rotinas: sequências de ações. Cada passo é uma ação do catálogo.
+modo-estudo:
+  description: "Abre o ambiente de estudo e põe o volume baixo"
+  steps:
+    - {action: app_open, args: {name: "obsidian"}}
+    - {action: volume_set, args: {percent: 25}}
+    - {action: remind, args: {in_minutes: 50, text: "Faz uma pausa de 10 minutos"}}
+boa-noite:
+  description: "Baixa o volume e bloqueia o ecrã"
+  steps:
+    - {action: volume_set, args: {percent: 10}}
+    - {action: lock_screen, args: {}}

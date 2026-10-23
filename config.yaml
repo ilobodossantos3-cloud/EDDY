@@ -1,0 +1,177 @@
+# ============================================================
+#  EDDY — configuração. Segredos ficam no .env (nunca aqui).
+# ============================================================
+user:
+  name: "Santos"          # como o Eddy te trata
+  timezone: Europe/Lisbon
+
+personality:
+  sarcasm: 2              # 0 neutro · 1 subtil · 2 normal · 3 máximo
+
+# ---------- Modelos (API ou local) ----------
+llm:
+  active: gemini             # perfil ativo (ver profiles abaixo)
+  fallback: inception    # usado se a API principal falhar (deixa "" para desligar)
+  profiles:
+    inception:
+      type: openai_compat
+      base_url: https://api.inceptionlabs.ai/v1
+      api_key_env: INCEPTION_API_KEY
+      model: mercury-3      # confirma na doc da Inception se existe "mercury-2.5"
+      supports_tools: true
+      vision: false
+    gemini:
+      type: openai_compat
+      base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+      api_key_env: GEMINI_API_KEY
+      model: gemini-3.8-flash
+      supports_tools: true
+    nvidia:
+      type: openai_compat
+      base_url: https://integrate.api.nvidia.com/v1
+      api_key_env: NVIDIA_API_KEY
+      model: meta/llama-3.3-70b-instruct
+      supports_tools: true
+    openrouter:
+      type: openai_compat
+      base_url: https://openrouter.ai/api/v1
+      api_key_env: OPENROUTER_API_KEY
+      model: inception/mercury-2.5-preview
+      supports_tools: true
+    ollama:
+      type: openai_compat
+      base_url: http://localhost:11434/v1
+      api_key_env: ""
+      model: llama3.1:8b
+      supports_tools: false
+    lmstudio:
+      type: openai_compat
+      base_url: http://localhost:1234/v1
+      api_key_env: ""
+      model: local-model
+      supports_tools: false
+    local_gguf:             # modelo GGUF descarregado do Hugging Face
+      type: llama_cpp
+      model_path: models/MODELO.gguf
+      n_ctx: 8192
+      n_gpu_layers: -1
+      supports_tools: false
+    local_hf:               # modelo safetensors descarregado do Hugging Face
+      type: transformers
+      model_path: models/MODELO_HF
+      device: auto
+      dtype: auto
+      load_in_4bit: false
+      supports_tools: false
+  timeout_s: 60
+  retries: 2
+
+# ---------- Voz ----------
+voice:
+  enabled: true
+  # Tudo na cloud: o áudio da tua voz vai para o fornecedor (Gemini/ElevenLabs) e o texto das respostas também.
+  stt:
+    order: [gemini, elevenlabs]            # o primeiro com chave transcreve; o seguinte é reserva
+    language: pt
+    input_device: null                     # microfone (número ou nome); null = o predefinido do Windows
+    gemini:
+      api_key_env: GEMINI_API_KEY
+      model: gemini-3.8-flash
+      vocabulary: "Eddy, Spotify, Chrome, YouTube, lembrete"   # ajuda a acertar nomes; vazio = sem ajuda
+    elevenlabs:
+      api_key_env: ELEVENLABS_API_KEY
+      model: scribe_v2
+  ptt:
+    key: f9                 # tecla global de "premir para falar" (lib "keyboard"). Na janela do HUD, também podes usar a barra de espaço.
+  conversation:
+    followup_seconds: 8     # continua a ouvir depois de responder
+  tts:
+    order: [gemini, elevenlabs]            # o primeiro disponível fala; o seguinte é reserva
+    private_mode: false     # true = voz desligada (nada vai para a cloud); só texto
+    max_chars: 500
+    gemini:
+      api_key_env: GEMINI_API_KEY
+      model: gemini-3.8-flash-tts
+      voice: Kore                          # uma das vozes pré-definidas da Gemini (ex.: Kore, Puck, Charon, Zephyr, Leda)
+      language: ""                         # vazio = a Gemini deteta o idioma
+      daily_char_limit: 20000
+      timeout_read_s: 30
+    elevenlabs:
+      api_key_env: ELEVENLABS_API_KEY
+      base_url: https://api.elevenlabs.io
+      voice_id: "2JG2Z2MJCg76VKAsidGt"                 # <- cola aqui o ID da tua voz (ElevenLabs > Voices > ... > Copy voice ID)
+      model: eleven_flash_v2_5     # rápido e com português. Mais qualidade: eleven_multilingual_v2
+      language_code: ""            # deixa vazio; só alguns modelos o aceitam (ex.: "pt" no flash_v2_5)
+      output_format: pcm_24000     # pcm_16000 | pcm_22050 | pcm_24000 | pcm_44100 (44100 só em plano Pro)
+      voice_settings: {stability: 0.5, similarity_boost: 0.75, style: 0.0, use_speaker_boost: true}
+      daily_char_limit: 20000
+      timeout_connect_s: 3
+      timeout_read_s: 15
+    cache_dir: cache/tts
+
+# ---------- HUD / servidor ----------
+hud:
+  mode: window              # window | browser | none
+  host: 127.0.0.1           # NÃO mudar (só localhost)
+  port: 8765
+  theme: eddy-cyan
+
+# ---------- Memória (vault) ----------
+vault:
+  path: vault
+  context_notes: 5
+  context_chars: 3000
+
+# ---------- Segurança ----------
+security:
+  mode: normal              # normal | safe (só níveis 0-1)
+  dry_run: false
+  confirm_timeout_s: 30
+  level2_delay_s: 1.0
+  panic_hotkey: ctrl+alt+esc
+  max_actions_per_minute: 30
+  max_steps_per_task: 8
+  allowed_folders:          # além do vault
+    - "~/Documents"
+    - "~/Documentos"
+    - "~/Downloads"
+    - "~/Transferências"
+    - "~/Desktop"
+    - "~/Secretária"
+  web_allow_private_hosts: false
+  shell:
+    enabled: false
+    allowed_commands: ["git status", "git log --oneline -n 10", "python --version"]
+
+# ---------- Plugins / skills / rotinas ----------
+plugins:
+  enabled: []               # ex: ["exemplo"] (ficheiros em plugins/)
+
+skills:
+  dir: skills
+
+inbox:
+  rss: []                   # ex: ["https://hnrss.org/frontpage"]
+
+# ---------- Briefing do dia ----------
+briefing:
+  weather:
+    enabled: true           # Open-Meteo (sem chave). Só envia estas coordenadas. false = sem tempo.
+    name: Amadora
+    lat: 38.7536
+    lon: -9.2302
+
+# ---------- Agendamento ----------
+scheduler:
+  enabled: true
+  speak: true
+  jobs:
+    - {name: recolher-novidades, cron: "55 6 * * *", skill: caixa-de-entrada, speak: false}
+    - {name: briefing-do-dia,    cron: "0 7 * * *",  skill: briefing-do-dia}
+    - {name: plano-do-dia,       cron: "0 9 * * *",  skill: plano-de-hoje}
+    - {name: encerrar-o-dia,     cron: "0 19 * * *", skill: tendencias}
+
+# ---------- Aplicação ----------
+app:
+  single_instance: true     # recusa arrancar uma segunda instância
+  lock_port: 8799

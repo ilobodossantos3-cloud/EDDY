@@ -1,0 +1,7 @@
+/* Tema alternativo verde. Para usar: hud.theme: matrix-green */
+:root{
+  --bg:#010a04; --bg2:#04140a; --panel:rgba(6,30,14,.55); --line:rgba(80,255,130,.28);
+  --cyan:#55ff8a; --cyan-dim:#2a9a50; --ink:#d9ffe6; --muted:#6fae83;
+  --ok:#b6ff4d; --warn:#ffd24d; --alert:#ff5a4d; --glow:0 0 14px rgba(85,255,138,.45);
+  --core-a:85,255,138; --core-b:190,255,120;
+}

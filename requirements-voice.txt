@@ -1,0 +1,6 @@
+-r requirements.txt
+sounddevice>=0.4.6
+faster-whisper>=1.0
+keyboard>=0.13; sys_platform == "win32"
+
+

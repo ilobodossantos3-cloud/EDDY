@@ -1,0 +1,7 @@
+/* Tema por omissão: laboratório holográfico, azul ciano sobre quase-preto. */
+:root{
+  --bg:#02070d; --bg2:#06131f; --panel:rgba(8,28,44,.55); --line:rgba(53,224,255,.28);
+  --cyan:#35e0ff; --cyan-dim:#1a8fa8; --ink:#d6f6ff; --muted:#6f9db0;
+  --ok:#4dffb0; --warn:#ffb347; --alert:#ff4d6a; --glow:0 0 14px rgba(53,224,255,.45);
+  --core-a:53,224,255; --core-b:120,160,255;
+}

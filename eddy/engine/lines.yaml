@@ -1,0 +1,47 @@
+# Frases curtas do Eddy (estilo J.A.R.V.I.S.). "N|texto" = só usa se o nível de humor configurado for >= N.
+startup:
+  - "0|Sistemas operacionais, senhor."
+  - "1|Bom dia, senhor. Todos os sistemas estão operacionais."
+  - "2|Online e às suas ordens, senhor."
+  - "2|De volta ao serviço, senhor. Tudo em ordem."
+  - "3|Acordei, senhor. O computador mantém-se, surpreendentemente, estável."
+done:
+  - "0|Feito, senhor."
+  - "0|Concluído."
+  - "1|Está feito, senhor."
+  - "2|Concluído, senhor. Sem incidentes."
+  - "2|Tratado, senhor."
+  - "3|Feito. Quase não foi preciso esforço da minha parte."
+error:
+  - "0|Isso não correu bem, senhor."
+  - "1|Algo falhou, senhor. Já ficou registado."
+  - "2|Houve uma falha, senhor. Estou a analisar o que aconteceu."
+  - "3|Falhou, senhor. Digamos que o computador não colaborou."
+thinking:
+  - "0|Um momento, senhor."
+  - "2|A processar, senhor."
+model_switch:
+  - "0|Modelo alterado, senhor."
+  - "2|A trocar de modelo, senhor. Um instante."
+fallback:
+  - "0|A ligação principal falhou, senhor. Estou a usar a reserva."
+  - "2|A ligação principal falhou, senhor. Passei para a reserva, sem perda de serviço."
+voice_fallback:
+  - "0|A voz principal falhou; uso a de reserva."
+  - "2|A voz principal ficou indisponível, senhor. Utilizo a de reserva."
+panic:
+  - "0|Tudo parado, senhor. As ações de risco ficam desativadas até as reativar."
+  - "2|Parei tudo, senhor. As ações de risco estão desativadas até nova ordem."
+private_on:
+  - "0|Modo privado ativado, senhor. A voz fica desligada."
+private_off:
+  - "0|Modo privado desativado, senhor."
+refused:
+  - "0|Isso não posso fazer, senhor."
+  - "2|Receio que isso não seja possível, senhor."
+unknown:
+  - "0|Não percebi, senhor. Pode repetir?"
+  - "2|Perdoe-me, senhor, não consegui perceber. Pode repetir?"
+reminder:
+  - "0|Lembrete:"
+  - "2|Senhor, o lembrete que pediu:"

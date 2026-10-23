@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+
+.venv/
+__pycache__/
+*.py[cod]
+
+eddy-os/
+
+logs/
+models/
+cache/
+
+vault/wiki/perfil.md

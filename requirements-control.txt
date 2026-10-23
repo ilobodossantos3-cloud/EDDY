@@ -1,0 +1,6 @@
+-r requirements.txt
+pyautogui>=0.9.54
+pygetwindow>=0.0.9; sys_platform == "win32"
+pycaw>=20230407; sys_platform == "win32"
+comtypes; sys_platform == "win32"
+mss>=9

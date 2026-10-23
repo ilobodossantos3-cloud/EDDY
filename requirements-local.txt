@@ -1,0 +1,12 @@
+# Modelos locais do Hugging Face. Escolhe UM dos dois:
+huggingface_hub>=0.24
+# A) GGUF (recomendado, mais leve):
+llama-cpp-python>=0.2.90
+# B) Safetensors via transformers (descomenta):
+# transformers>=4.44
+# torch
+# accelerate
+
+# Reserva opcional de transcricao local (pode ser bloqueada por politicas do Windows).
+-r requirements-voice.txt
+faster-whisper>=1.0
